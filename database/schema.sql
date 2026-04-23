@@ -1,0 +1,34 @@
+CREATE DATABASE IF NOT EXISTS ecommerce_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE ecommerce_db;
+
+CREATE TABLE IF NOT EXISTS users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nom VARCHAR(100) NOT NULL,
+    email VARCHAR(190) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS produits (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nom VARCHAR(150) NOT NULL,
+    description TEXT NULL,
+    prix DECIMAL(10,2) NOT NULL,
+    categorie VARCHAR(80) NOT NULL,
+    image TEXT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS commandes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    id_client INT NULL,
+    nom_client VARCHAR(100) NOT NULL,
+    telephone VARCHAR(40) NOT NULL,
+    adresse VARCHAR(255) NOT NULL,
+    total DECIMAL(10,2) NOT NULL,
+    produits_ids TEXT NOT NULL,
+    date_creation TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT fk_commandes_users
+        FOREIGN KEY (id_client) REFERENCES users(id)
+        ON DELETE SET NULL
+);
