@@ -178,6 +178,7 @@ function App() {
         </section>
       )}
 
+
       <section className="products-shell reveal">
       <section className={`products${listMode ? ' list-mode' : ''}`} id="products">
         {loading && <article className="card"><h3>Chargement...</h3><p className="meta">Mise a jour du catalogue en cours.</p></article>}
